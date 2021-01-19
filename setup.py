@@ -9,7 +9,7 @@ README = (HERE / "README.md").read_text()
 
 # This call to setup() does all the work
 setup(
-    name="pyFathom",
+    name="mycelium",
     # version="1.0.0",
     version_config=True,
     # version_config={
@@ -25,7 +25,7 @@ setup(
     description="Databricks Framework Utilities",
     long_description=README,
     long_description_content_type="text/markdown",
-    url="https://sibytes.visualstudio.com/Fathom/_git/PyFathom",
+    url="https://github.com/semanticinsight/mycelium",
     author="Shaun Ryan",
     author_email="shaun_chiburi@hotmail.com",
     license="MIT",
@@ -34,6 +34,6 @@ setup(
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7",
     ],
-    packages=["fathom","mycelium"],
+    packages=["mycelium"],
     zip_safe=False
 )

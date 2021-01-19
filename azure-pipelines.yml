@@ -29,14 +29,14 @@ steps:
     pip install -r requirements.txt
   displayName: 'Install dependencies'
 
-- script: |
-    echo "y
-    $(WORKSPACE-REGION-URL)
-    $(DATABRICKS-PAT-TOKEN)
-    $(TEST-CLUSTER-ID)
-    $(WORKSPACE-ORG-ID)
-    15001" | databricks-connect configure
-  displayName: 'Configure DBConnect'
+# - script: |
+#     echo "y
+#     $(WORKSPACE-REGION-URL)
+#     $(DATABRICKS-PAT-TOKEN)
+#     $(TEST-CLUSTER-ID)
+#     $(WORKSPACE-ORG-ID)
+#     15001" | databricks-connect configure
+#   displayName: 'Configure DBConnect'
 
 - script: |
     python setup.py sdist bdist_wheel
