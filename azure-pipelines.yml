@@ -73,8 +73,8 @@ steps:
 - script: |
     echo "y
     $(WORKSPACE-REGION-URL)
-    $(CSE-DEVELOP-PAT)
-    $(EXISTING-CLUSTER-ID)
+    $(DATABRICKS-PAT-TOKEN)
+    $(TEST-CLUSTER-ID)
     $(WORKSPACE-ORG-ID)
     15001" | databricks-connect configure
   displayName: 'Configure DBConnect'
