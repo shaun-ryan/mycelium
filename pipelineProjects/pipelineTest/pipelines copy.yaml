@@ -1,0 +1,56 @@
+version: sibytes.io/mycelium/pipeline/api/0.1.0
+maxParallel: 4
+pipelines:
+  - name: pipelineTest
+    tasks:
+
+      - pyTask0
+
+      - name: taskgroup1
+        tasks:
+          - pyTask1
+          - pyTask2
+          - pyTask3
+
+      - name: taskgroup2
+        enabled: False
+        tasks:
+          - pyTask4
+          - pyTask5
+          - pyTask6
+
+      - name: taskgroup3
+        dependsOn:
+          - task: taskgroup1
+            condition: success
+            operator: AND
+          - task: taskgroup2
+            condition: success
+            operator: AND
+        tasks:
+          - pyTask7
+          - pyTask8
+          - pyTask9
+
+      - name: taskgroup41
+        tasks:
+          - pyTask10
+          - pyTask11
+
+      - name: taskgroup42
+        dependsOn:
+          - task: taskgroup41
+            condition: completion
+            operator: AND
+          - task: pyTask0
+            condition: completion
+            operator: AND
+          - task: taskgroup3
+            condition: success
+            operator: OR
+          
+        tasks:
+          - pyTask13
+          - pyTask14
+          - pyTask15
+

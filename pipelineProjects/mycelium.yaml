@@ -1,0 +1,10 @@
+version: sibytes.io/mycelium/project/api/0.1.0
+project:
+  name: pipelineTest
+  directory: ./pipelineTest/
+  pipelines:
+    - ./pipelines.yaml
+  tasks:
+    - ./tasks.yaml
+  patterns:
+    - ./patterns.yaml

@@ -1,0 +1,11 @@
+version: sibytes.io/mycelium/pattern/api/0.1.0
+patterns:
+  - name: default
+    path: ./
+    timeout: 3600
+    transformation: default
+    enabled: True
+    retry: 0
+    parameters:
+      - path: "{path}{name}"
+      - waittimeout: 5

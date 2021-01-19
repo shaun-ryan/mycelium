@@ -1,0 +1,4 @@
+databricks-connect==7.1.10
+py4j==0.10.9
+six==1.15.0
+PyYAML==5.3.1

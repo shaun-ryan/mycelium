@@ -1,0 +1,115 @@
+# Python package
+# Create and test a Python package on multiple Python versions.
+# Add steps that analyze code, save the dist with the build record, publish to a PyPI-compatible index, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/python
+
+variables:
+- name: ENVIRONMENT
+  value: LOCALDEV
+- name: AZUREADID
+  value: a69c8df4-e648-4b0a-beb9-b3716a01f60e
+- name: LOGAPPALERTEMAIL
+  value: shaun_chibru@hotmail.com
+- name: AUTOMATIONSCOPE
+  value: azure-key-vault-scope
+- name: DATALAKESTORAGEREDACTED
+  value: AzureDataLakeGen2
+- name: DATALAKESTORAGEACCOUNTREDACTED
+  value: abfss://datalake@datalakegeneva.dfs.core.windows.net/
+- name: DATALAKEREDACTEDROOT
+  value: databricks/delta_dev_redacted
+- name: DATALAKESTORAGE
+  value: AzureDataLakeGen2
+- name: DATALAKESTORAGEACCOUNT
+  value: abfss://datalake@datalakegeneva.dfs.core.windows.net/
+- name: DATAENGINEERINGCONTROLDB
+  value: DataEngineeringControl
+- name: DATAENGINEERINGCONTROLHOST
+  value: dataplatform-sql.database.windows.net
+- name: DATAENGINEERINGCONTROLUSER
+  value: svc_DPUser
+- name: RESOURCEGROUP
+  value: DataPlatform
+- name: SUBSCRIPTIONID
+  value: e95203c2-64a0-43f9-bfc5-a4fdc588571a
+- name: DATALAKECONNECTIONSTRING
+  value: DATALAKE-CONNECTION-STRING
+- name: LOGAPPALERTENDPOINT
+  value: LOGAPP-ALERT-ENDPOINT
+- name: SQLDATAENGEERINGCONTROLPASSWORD
+  value: SQL-DATAENGEERINGCONTROL-PASSWORD
+- name: DATALAKESPNAPPID
+  value: DATALAKE-SPN-APPID
+- name: DATALAKESPNOBJECTID
+  value: DATALAKE-SPN-OBJECTID
+- name: DATALAKESPNCREDENTIAL
+  value: DATALAKE-SPN-CREDENTIAL
+- name: LOGGINGLEVELOVERRIDE
+  value: ERROR
+- name: PIPELINEPROJECTSDIR
+  value: ./pipelineProjects/
+
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+strategy:
+  matrix:
+    Python37:
+      python.version: '3.7'
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '$(python.version)'
+  displayName: 'Use Python $(python.version)'
+
+- script: |
+    python -m pip install --upgrade pip setuptools wheel twine
+    pip install -r requirements.txt
+  displayName: 'Install dependencies'
+
+- script: |
+    echo "y
+    $(WORKSPACE-REGION-URL)
+    $(CSE-DEVELOP-PAT)
+    $(EXISTING-CLUSTER-ID)
+    $(WORKSPACE-ORG-ID)
+    15001" | databricks-connect configure
+  displayName: 'Configure DBConnect'
+
+- script: |
+    python setup.py sdist bdist_wheel
+    ls dist/
+  displayName: 'Artifact creation'
+
+- script: |
+    pip install --editable .
+    pip install pytest pytest-azurepipelines
+    pytest
+  displayName: 'Unit Tests'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)/dist'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'dist'
+    publishLocation: 'Container'
+  displayName: 'Publish Build Artefacts'
+
+- task: TwineAuthenticate@0
+  inputs:
+    artifactFeeds: 'sibytes'
+    # externalFeeds: 'pypi'
+  displayName: 'Authenticate Twine'
+
+- script: |
+    twine upload -r sibytes --config-file $(PYPIRC_PATH) $(Build.SourcesDirectory)/dist/*
+  continueOnError: true
+  displayName: 'Publish to SiBytes Artefact Store'

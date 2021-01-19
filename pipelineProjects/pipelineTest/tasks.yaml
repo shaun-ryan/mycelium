@@ -1,0 +1,73 @@
+version: sibytes.io/mycelium/task/api/0.1.0
+tasks:
+  - type: databricksNotebook
+    name: pyTask0
+    pattern: default
+
+  - type: databricksNotebook
+    name: pyTask1
+    pattern: default
+
+  - type: databricksNotebook
+    name: pyTask2
+    pattern: default
+
+  - type: databricksNotebook
+    name: pyTask2_1
+    pattern: default
+
+  - type: databricksNotebook
+    name: pyTask2_2
+    pattern: default
+
+  - type: databricksNotebook
+    name: pyTask3
+    pattern: default
+
+  - type: databricksNotebook
+    name: pyTask4
+    pattern: default
+
+  - type: databricksNotebook
+    name: pyTask5
+    pattern: default
+
+  - type: databricksNotebook
+    name: pyTask6
+    pattern: default
+
+  - type: databricksNotebook
+    name: pyTask7
+    pattern: default
+
+  - type: databricksNotebook
+    name: pyTask8
+    pattern: default
+
+  - type: databricksNotebook
+    name: pyTask9
+    pattern: default
+
+  - type: databricksNotebook
+    name: pyTask10
+    pattern: default
+
+  - type: databricksNotebook
+    name: pyTask11
+    pattern: default
+
+  - type: databricksNotebook
+    name: pyTask12
+    pattern: default
+
+  - type: databricksNotebook
+    name: pyTask13
+    pattern: default
+
+  - type: databricksNotebook
+    name: pyTask14
+    pattern: default
+
+  - type: databricksNotebook
+    name: pyTask15
+    pattern: default
