@@ -4,50 +4,9 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/python
 
 variables:
-- name: ENVIRONMENT
-  value: LOCALDEV
-- name: AZUREADID
-  value: a69c8df4-e648-4b0a-beb9-b3716a01f60e
-- name: LOGAPPALERTEMAIL
-  value: shaun_chibru@hotmail.com
-- name: AUTOMATIONSCOPE
-  value: azure-key-vault-scope
-- name: DATALAKESTORAGEREDACTED
-  value: AzureDataLakeGen2
-- name: DATALAKESTORAGEACCOUNTREDACTED
-  value: abfss://datalake@datalakegeneva.dfs.core.windows.net/
-- name: DATALAKEREDACTEDROOT
-  value: databricks/delta_dev_redacted
-- name: DATALAKESTORAGE
-  value: AzureDataLakeGen2
-- name: DATALAKESTORAGEACCOUNT
-  value: abfss://datalake@datalakegeneva.dfs.core.windows.net/
-- name: DATAENGINEERINGCONTROLDB
-  value: DataEngineeringControl
-- name: DATAENGINEERINGCONTROLHOST
-  value: dataplatform-sql.database.windows.net
-- name: DATAENGINEERINGCONTROLUSER
-  value: svc_DPUser
-- name: RESOURCEGROUP
-  value: DataPlatform
-- name: SUBSCRIPTIONID
-  value: e95203c2-64a0-43f9-bfc5-a4fdc588571a
-- name: DATALAKECONNECTIONSTRING
-  value: DATALAKE-CONNECTION-STRING
-- name: LOGAPPALERTENDPOINT
-  value: LOGAPP-ALERT-ENDPOINT
-- name: SQLDATAENGEERINGCONTROLPASSWORD
-  value: SQL-DATAENGEERINGCONTROL-PASSWORD
-- name: DATALAKESPNAPPID
-  value: DATALAKE-SPN-APPID
-- name: DATALAKESPNOBJECTID
-  value: DATALAKE-SPN-OBJECTID
-- name: DATALAKESPNCREDENTIAL
-  value: DATALAKE-SPN-CREDENTIAL
-- name: LOGGINGLEVELOVERRIDE
-  value: ERROR
-- name: PIPELINEPROJECTSDIR
-  value: ./pipelineProjects/
+- group: databricks
+- group: data-platform-kv
+- group: fathom
 
 trigger:
 - main
