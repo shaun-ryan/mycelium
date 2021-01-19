@@ -6,7 +6,7 @@
 variables:
 - group: databricks
 - group: data-platform-kv
-- group: fathom
+- group: mycelium
 
 trigger:
 - main
