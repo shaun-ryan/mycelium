@@ -24,8 +24,8 @@ for whl in wheels:
     dbfs_upload(whl, f"{deploy_dir}/{whl_filename}", True)
 
 # deploy clusters
-cluster_dir = f"{deploy_dir}/databricks/clusters"
-init_scripts_dir = f"{deploy_dir}/databricks/init_scripts"
+cluster_dir = f"{build_dir}/databricks/clusters"
+init_scripts_dir = f"{build_dir}/databricks/init_scripts"
 
 clusters_create(cluster_dir, delete_if_exists=True, init_script_path=init_scripts_dir)
 
