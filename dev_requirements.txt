@@ -1,0 +1,9 @@
+wheel
+setuptools 
+pytest==6.2.2
+pytest-env==0.6.2
+setuptools-git-versioning==1.2.10
+requests-mock==1.8.0
+pytest-mock==3.5.1
+pytest-cov==2.11.1
+flake8==3.8.4

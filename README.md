@@ -1,24 +1,10 @@
-# Introduction 
-Python framework for databricks. A library that handles the following either clusterside of locally (using Databricks-Connect):
-- Configuration
-- Logging
-- Azure Storage Session Connection
+# Introduction
 
-Examples:
+Deployment python scripting utilities for databricks. Currently provides a much more flexible way to do the following:
+- Inspect, cleanup and deploy notebooks and folders of notebooks to a workspace
+- Run notebooks on a jobs cluster for integration tests and deploymenyt processing databricks side
+- Inspect, cleanup and deploy large binary files to databricks Dbfs e.g. data or libraries
 
-Mount azure storage using a session connection and Azure AD service principal backed by scoped secrets and cluster configuration:
-
-```
-from fathom.ConnectStorage import ConnectStorage
-ConnectStorage()
-```
-
-```
-Connected:
------------------------------------------------
- environment = DEV
- storage account = abfss://datalake@datalakegeneva.dfs.core.windows.net/ 
-```
 
 # Setup
 
@@ -29,31 +15,59 @@ python3.7 -m venv venv
 source venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt
+pip install -r dev_requirements.txt
 ```
 
-Comes configured with databricks-connect==7.1.10, see requirements.txt. To use a different version review breaking changes before hand! & delete these lines in requirements.txt.
+The application requires the following environment variables specific the databricks workspace and security token that you're using for testing, development and deployment. Substitute your own values between the angled brackets:
+
 ```
-databricks-connect==7.1.10
-py4j==0.10.9
-six==1.15.0
+N/A
 ```
 
-Install your required version:
+Exporting variables doesn't make for a great development experience so I recommend using the enviroment manager tools of your editor and for testing create a ./pytest.ini that looks like this:
+
 ```
-pip install -U databricks-connect==?
-pip freeze > requirements.txt
+[pytest]
+env =
+    
 ```
+
+**REMINDER: do NOT commit any files that contain security tokens**
+
+Git ignore already contains an exclusion for pytest.ini
+
+# Example
 
 
 # Build
 
-Build python wheel for Databricks cluster:
+Build python wheel:
 ```
 python setup.py sdist bdist_wheel
 ```
 
+There is a CI build configured for this repo that builds on main origin on a private Azure DevOps service. It doesn't yet push to PyPi.
+
 # Test
 
+Dependencies for testing:
+```
+pip install --editable .
+```
 
-# Contribute
+Run tests:
+```
+pytest
+```
+
+Test Coverage:
+```
+pytest --cov=spores --cov-report=html
+```
+
+View the report in a browser:
+```
+./htmlcov/index.html
+```
+
 
