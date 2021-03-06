@@ -58,6 +58,7 @@ steps:
     Contents: |
       dist/**
       deployment/**
+      databricks/**
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1

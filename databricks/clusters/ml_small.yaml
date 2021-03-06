@@ -1,0 +1,27 @@
+num_workers: 1
+cluster_name: "{filename}_{dbr}"
+spark_version: "8.0.x-cpu-ml-scala2.12"
+spark_conf":
+  spark.databricks.cluster.profile: "serverless"
+  spark.databricks.passthrough.enabled: "true"
+  spark.databricks.pyspark.enableProcessIsolation: "true"
+  spark.databricks.repl.allowedLanguages: "python,sql"
+azure_attributes:
+  first_on_demand: 1
+  availability: ON_DEMAND_AZURE
+  spot_bid_max_price: -1
+node_type_id: "Standard_DS3_v2"
+driver_node_type_id: "Standard_DS3_v2"
+ssh_public_keys:
+custom_tags:
+  deployed_by: "devops"
+# cluster_log_conf:
+#   Dbfs:
+#     destination: "bbfs:/FileStore/cluster/logs/{cluster_name}"
+init_scripts:
+  - dbfs:
+      destination: "dbfs:/FileStore/cluster/init/{cluster_name}.sh"
+spark_env_vars:
+  ENVIRONMENT: "TEST"
+autotermination_minutes: 30
+enable_elastic_disk: true
