@@ -15,6 +15,7 @@ driver_node_type_id: "Standard_DS3_v2"
 ssh_public_keys:
 custom_tags:
   deployed_by: "devops"
+  ResourceClass: "Serverless"
 # cluster_log_conf:
 #   Dbfs:
 #     destination: "bbfs:/FileStore/cluster/logs/{cluster_name}"
@@ -25,3 +26,4 @@ spark_env_vars:
   ENVIRONMENT: "TEST"
 autotermination_minutes: 30
 enable_elastic_disk: true
+
