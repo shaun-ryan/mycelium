@@ -1,6 +1,6 @@
 import pathlib
 from setuptools import setup
-from setuptools_databricks import DatabricksBuild
+from setuptools_databricks.DatabricksBuild import DatabricksBuild
 import os
 
 
@@ -13,7 +13,7 @@ README = (HERE / "README.md").read_text()
 # This call to setup() does all the work
 setup(
     name="mycelium",
-    cmdclass={"build_databricks_project": BuildDatabricksProject},
+    cmdclass={"build_databricks_project": DatabricksBuild},
     version_config={
         "template": "{tag}",
         "dev_template": "{tag}.dev{ccount}",
