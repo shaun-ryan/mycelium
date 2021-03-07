@@ -13,7 +13,7 @@ deploy_dir = sys.argv[4]
 filename = sys.argv[5]
 
 # deploy wheel
-wheel_dir = f"{deploy_dir}/dist"
+wheel_dir = f"{build_dir}/dist"
 wheels = find_file('*.whl', wheel_dir)
 
 for whl in wheels:
