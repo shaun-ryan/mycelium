@@ -1,5 +1,12 @@
 #!/bin/bash
 
+#!BEGIN_LIBS
+MYCELIUM="mycelium"
+#!END_LIBS
+
+WHEELDIR="/dbfs/FileStore/deployment/wheels/"
+
+
 export ENVIRONMENT=DEV
 export AZUREADID=a69c8df4-e648-4b0a-beb9-b3716a01f60e
 export LOGAPPALERTEMAIL=shaun_chibru@hotmail.com
@@ -14,4 +21,4 @@ export DATAPLATFORMSECRET=DATALAKE-SPN-CREDENTIAL
 export LOGGINGLEVELOVERRIDE=ERROR
 export PIPELINEPROJECTSDIR=/dbfs/FileStore/pipelineProjects/
 
-pip install /dbfs/FileStore/deployment/wheels/mycelium-0.1.0-py3-none-any.whl
+pip install "$WHEELDIR$MYCELIUM"
