@@ -145,22 +145,20 @@ class BuildDatabricksProject(distutils.cmd.Command):
                     with open(to_path, 'w') as to_file:
                         shell = from_file.readlines()
 
-                        parse_libs = False
                         for l in shell:
 
-                            if "#!BEGIN_LIBS" in l:
-                                parse_libs = True
-                            elif "#!END_LIBS" in l:
-                                parse_libs = False
-
-                            if parse_libs and not "#!BEGIN_LIBS" in l:
-                                parts = l.split("=")
-                                print(parts[0].lower())
-                                wheel = self._get_latest_wheel(self.dist, parts[0].lower())
-                                wheel_file = os.path.basename(wheel.path)
-                                to_file.write(f'{parts[0]}="{wheel_file}"')
-                                print(wheel)
-                            elif not parse_libs and not "#!END_LIBS" in l:
+                            if l[0:11] == "pip install":
+                                path = l.split(" ")[-1]
+                                filename = os.path.basename(path)
+                                path = path.replace(filename, "")
+                                filename, ext = os.path.splitext(filename)
+                                wheel = self._get_latest_wheel(self.dist, filename)
+                                wheel_filename = os.path.basename(wheel.path)
+                                if wheel:
+                                    to_file.write(f"pip install {path}{wheel_filename}")
+                                else:
+                                    to_file.write(l)
+                            else:
                                 to_file.write(l)
                                 
 
