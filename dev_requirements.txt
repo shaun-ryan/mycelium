@@ -8,4 +8,4 @@ pytest-mock==3.5.1
 pytest-cov==2.11.1
 flake8==3.8.4
 wheel-inspect==1.7.0
-setuptools-databricks==0.1.0
+setuptools-databricks==0.1.1
