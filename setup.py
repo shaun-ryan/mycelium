@@ -153,8 +153,8 @@ class BuildDatabricksProject(distutils.cmd.Command):
                                 path = path.replace(filename, "")
                                 filename, ext = os.path.splitext(filename)
                                 wheel = self._get_latest_wheel(self.dist, filename)
-                                wheel_filename = os.path.basename(wheel.path)
                                 if wheel:
+                                    wheel_filename = os.path.basename(wheel.path)
                                     to_file.write(f"pip install {path}{wheel_filename}")
                                 else:
                                     to_file.write(l)
