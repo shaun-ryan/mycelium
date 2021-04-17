@@ -3,8 +3,8 @@ import os, fnmatch, sys
 os.environ["DATABRICKS_API_HOST"] = sys.argv[1]
 os.environ["DBUTILSTOKEN"] = sys.argv[2]
 
-from spores.Dbfs import find_file, dbfs_upload
-from spores.Clusters import clusters_create
+from autobricks.Dbfs import find_file, dbfs_upload
+from autobricks.Cluster import clusters_create
 from uuid import uuid4
 from pprint import pprint
 

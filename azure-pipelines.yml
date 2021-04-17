@@ -42,7 +42,7 @@ steps:
 - script: |
     export SKIP_INTEGRATION=True
     pip install .
-    pytest test --junitxml=junit/test-results.xml --cov=spores --cov-report=xml --cov-report=html
+    pytest test --junitxml=junit/test-results.xml --cov=mycelium --cov-report=xml --cov-report=html
   displayName: 'Unit Tests'
 
 - task: PublishTestResults@2

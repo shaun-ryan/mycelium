@@ -62,7 +62,7 @@ pytest
 
 Test Coverage:
 ```
-pytest --cov=spores --cov-report=html
+pytest --cov=mycelium --cov-report=html
 ```
 
 View the report in a browser:
