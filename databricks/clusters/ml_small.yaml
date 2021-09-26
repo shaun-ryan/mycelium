@@ -1,9 +1,10 @@
 num_workers: 1
 cluster_name: "{filename}_{dbr}"
-spark_version: "8.0.x-cpu-ml-scala2.12"
-spark_conf":
+spark_version: "9.1.x-cpu-ml-scala2.12"
+spark_conf:
   spark.databricks.cluster.profile: "serverless"
   spark.databricks.passthrough.enabled: "true"
+  spark.databricks.delta.preview.enabled: "true"
   spark.databricks.pyspark.enableProcessIsolation: "true"
   spark.databricks.repl.allowedLanguages: "python,sql"
 azure_attributes:
