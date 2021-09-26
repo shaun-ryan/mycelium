@@ -38,7 +38,7 @@ setup(
     ],
     packages=["mycelium"],
     install_requires=[
-          'PyYAML'
+          'PyYAML',
       ],
     zip_safe=False
 )
