@@ -15,13 +15,19 @@ setup(
     name="mycelium",
     cmdclass={"build_databricks_project": DatabricksBuild},
     version_config={
+
         "template": "{tag}",
-        "dev_template": "{tag}.dev{ccount}",
-        "dirty_template": "{tag}.dev{ccount}.dirty",
+        "dev_template": "{tag}.post{ccount}+git.{sha}",
+        "dirty_template": "{tag}.post{ccount}+git.{sha}.dirty",
         "starting_version": "0.0.1",
         "version_callback": None,
         "version_file": None,
-        "count_commits_from_version_file": False
+        "count_commits_from_version_file": False,
+        "branch_formatter": None,
+        "sort_by": None,
+        # "template": "{tag}",
+        # "dev_template": "{tag}.dev{ccount}",
+        # "dirty_template": "{tag}.dev{ccount}.dirty",
     },
     setup_requires=['setuptools-git-versioning'],
     description="Databricks Framework Utilities",
