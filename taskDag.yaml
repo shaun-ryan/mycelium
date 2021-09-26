@@ -1,0 +1,76 @@
+pipelineTest:
+    dependents:
+    - pyTask1
+    enabled: true
+    name: pipelineTest
+    status: NONE
+    type: PipelineOrigin
+pyTask1:
+    dependencies:
+    -   condition: COMPLETION
+        operator: OR
+        task: pipelineTest
+    dependents:
+    - pyTask2_1
+    - pyTask2_2
+    enabled: true
+    name: pyTask1
+    parameters: &id001
+    -   path: '{path}{name}'
+    -   waittimeout: 5
+    path: ./
+    retry: 0
+    status: NONE
+    timeout: 3600
+    transformation: default
+    type: databricksNotebook
+pyTask2_1:
+    dependencies:
+    -   condition: SUCCESS
+        operator: AND
+        task: pyTask1
+    dependents:
+    - pyTask3
+    enabled: true
+    name: pyTask2_1
+    parameters: *id001
+    path: ./
+    retry: 0
+    status: NONE
+    timeout: 3600
+    transformation: default
+    type: databricksNotebook
+pyTask2_2:
+    dependencies:
+    -   condition: SUCCESS
+        operator: AND
+        task: pyTask1
+    dependents:
+    - pyTask3
+    enabled: true
+    name: pyTask2_2
+    parameters: *id001
+    path: ./
+    retry: 0
+    status: NONE
+    timeout: 3600
+    transformation: default
+    type: databricksNotebook
+pyTask3:
+    dependencies:
+    -   condition: SUCCESS
+        operator: AND
+        task: pyTask2_1
+    -   condition: SUCCESS
+        operator: AND
+        task: pyTask2_2
+    dependents: []
+    enabled: true
+    name: pyTask3
+    parameters: *id001
+    path: ./
+    retry: 0
+    status: NONE
+    timeout: 3600
+    transformation: default
+    type: databricksNotebook

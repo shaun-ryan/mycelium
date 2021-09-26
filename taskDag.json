@@ -1,0 +1,127 @@
+{
+    "pipelineTest": {
+        "name": "pipelineTest",
+        "status": "NONE",
+        "type": "PipelineOrigin",
+        "enabled": true,
+        "dependents": [
+            "pyTask1"
+        ]
+    },
+    "pyTask1": {
+        "name": "pyTask1",
+        "status": "NONE",
+        "type": "databricksNotebook",
+        "path": "./",
+        "timeout": 3600,
+        "transformation": "default",
+        "enabled": true,
+        "retry": 0,
+        "parameters": [
+            {
+                "path": "{path}{name}"
+            },
+            {
+                "waittimeout": 5
+            }
+        ],
+        "dependents": [
+            "pyTask2_1",
+            "pyTask2_2"
+        ],
+        "dependencies": [
+            {
+                "task": "pipelineTest",
+                "condition": "COMPLETION",
+                "operator": "OR"
+            }
+        ]
+    },
+    "pyTask2_1": {
+        "name": "pyTask2_1",
+        "status": "NONE",
+        "type": "databricksNotebook",
+        "path": "./",
+        "timeout": 3600,
+        "transformation": "default",
+        "enabled": true,
+        "retry": 0,
+        "parameters": [
+            {
+                "path": "{path}{name}"
+            },
+            {
+                "waittimeout": 5
+            }
+        ],
+        "dependents": [
+            "pyTask3"
+        ],
+        "dependencies": [
+            {
+                "task": "pyTask1",
+                "condition": "SUCCESS",
+                "operator": "AND"
+            }
+        ]
+    },
+    "pyTask2_2": {
+        "name": "pyTask2_2",
+        "status": "NONE",
+        "type": "databricksNotebook",
+        "path": "./",
+        "timeout": 3600,
+        "transformation": "default",
+        "enabled": true,
+        "retry": 0,
+        "parameters": [
+            {
+                "path": "{path}{name}"
+            },
+            {
+                "waittimeout": 5
+            }
+        ],
+        "dependents": [
+            "pyTask3"
+        ],
+        "dependencies": [
+            {
+                "task": "pyTask1",
+                "condition": "SUCCESS",
+                "operator": "AND"
+            }
+        ]
+    },
+    "pyTask3": {
+        "name": "pyTask3",
+        "status": "NONE",
+        "type": "databricksNotebook",
+        "path": "./",
+        "timeout": 3600,
+        "transformation": "default",
+        "enabled": true,
+        "retry": 0,
+        "parameters": [
+            {
+                "path": "{path}{name}"
+            },
+            {
+                "waittimeout": 5
+            }
+        ],
+        "dependents": [],
+        "dependencies": [
+            {
+                "task": "pyTask2_1",
+                "condition": "SUCCESS",
+                "operator": "AND"
+            },
+            {
+                "task": "pyTask2_2",
+                "condition": "SUCCESS",
+                "operator": "AND"
+            }
+        ]
+    }
+}
