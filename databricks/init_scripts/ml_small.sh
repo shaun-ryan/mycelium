@@ -15,4 +15,4 @@ export LOGGINGLEVELOVERRIDE=ERROR
 export PIPELINEPROJECTSDIR=/dbfs/FileStore/pipelineProjects/
 
 pip install /dbfs/FileStore/deployment/wheels/mycelium.whl
-pip install autobricks
+/databricks/python/bin/pip install install autobricks
