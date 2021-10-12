@@ -75,11 +75,13 @@ steps:
 
 - task: TwineAuthenticate@0
   inputs:
-    artifactFeeds: 'sibytes'
+    artifactFeeds: 'Databricks/DTP'
     # externalFeeds: 'pypi'
   displayName: 'Authenticate Twine'
 
 - script: |
-    twine upload -r sibytes --config-file $(PYPIRC_PATH) $(Build.SourcesDirectory)/dist/*
+    echo $(PYPIRC_PATH)
+    cat $(PYPIRC_PATH)
+    twine upload -r DTP --config-file $(PYPIRC_PATH) $(Build.SourcesDirectory)/dist/*
   continueOnError: true
   displayName: 'Publish to SiBytes Artefact Store'
