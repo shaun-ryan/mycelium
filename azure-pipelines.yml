@@ -82,6 +82,6 @@ steps:
 - script: |
     echo $(PYPIRC_PATH)
     cat $(PYPIRC_PATH)
-    twine upload -r DTP --config-file $(PYPIRC_PATH) $(Build.SourcesDirectory)/dist/*
+    twine upload -r 'Databricks/DTP' --config-file $(PYPIRC_PATH) $(Build.SourcesDirectory)/dist/*
   continueOnError: true
   displayName: 'Publish to SiBytes Artefact Store'
